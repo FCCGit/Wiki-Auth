@@ -1,0 +1,8 @@
+This mod is for automatic authentication based on SMF permissions. There is no automated installer for this, you'll have to follow some directions.
+
+1. Put the AutoAuthenticate_SMF.php file in the MediaWiki "./extensions" dir
+2. In LocalSettings.php add:
+	$wgSMFPathAPI= "/the/server/path/to/smf/SSI.php";
+	require_once './extensions/AutoAuthenticate_SMF.php';
+	$wgAuth = new Auth_SMF();
+3. Profit!
