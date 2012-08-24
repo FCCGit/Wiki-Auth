@@ -7,9 +7,6 @@ if(!require_once($wgSMFPathAPI))
 function AutoAuthenticateSMF($wgUser, &$result)
 {
         global $user_info;
-	//echo '<pre>';
-	//print_r($wgUser);
-	//echo '</pre>';	
 
         // wiki user need setting?
         if(!(isset($wgUser))){
@@ -17,9 +14,10 @@ function AutoAuthenticateSMF($wgUser, &$result)
                 $wgUser->newFromSession();
                 $wgUser->load();
         }
- 
-        if($wgUser->IsAnon() && !$user_info['is_guest'])
-        {
+
+ 	if(!isset($user_info['username']) || $user_info['username'] == ""){
+		$wgUser->logout();	
+	} else if($wgUser->IsAnon() && !$user_info['is_guest']){
                 $wgUser = User::newFromName( $user_info['username'] );
                 if ( 0 != $wgUser->idForName() ) 
                 {
